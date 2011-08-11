@@ -1,1 +1,5 @@
 lib/qwik/.test/
+lib/qwik/testtemp.zip
+.test
+*.log
+

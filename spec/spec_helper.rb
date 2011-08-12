@@ -59,4 +59,6 @@ RSpec.configure do |spec_config|
     @wwwdir.teardown if @wwwdir
     @dir.teardown if @dir
   end
+
+  spec_config.mock_with :rr
 end

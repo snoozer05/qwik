@@ -7,4 +7,5 @@ gem 'ruby-gd'
 
 group :test do
   gem 'rspec'
+  gem 'rr'
 end

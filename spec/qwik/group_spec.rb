@@ -4,42 +4,51 @@ require 'qwik/group'
 module QuickML
   describe Group do
     describe ".get_name" do
-      it "return ['test', 'example.com'] if called with 'test@example.com'" do
-        QuickML::Group.get_name('test@example.com').should == ['test', 'example.com']
+      describe "with argument 'test@example.com'" do
+        subject { QuickML::Group.get_name('test@example.com') }
+        it { should == ['test', 'example.com'] }
       end
     end
 
     describe ".valid_name?" do
-      it "return true if called with 't'" do
-        QuickML::Group.valid_name?('t').should be_true
+      describe "with argument 't'" do
+        subject { QuickML::Group.valid_name?('t') }
+        it { should be_true }
       end
 
-      it "return true if called with 't-t'" do
-        QuickML::Group.valid_name?('t-t').should be_true
+      describe "with argument 't-t'" do
+        subject { QuickML::Group.valid_name?('t-t') }
+        it { should be_true }
       end
 
-      it "return false if called with 't_t'" do
-        QuickML::Group.valid_name?('t_t').should be_false
+      describe "with argument 't_t'" do
+        subject { QuickML::Group.valid_name?('t_t') }
+        it { should be_false }
       end
 
-      it "return false if called with 't.t'" do
-        QuickML::Group.valid_name?('t.t').should be_false
+      describe "with argument 't.t'" do
+        subject { QuickML::Group.valid_name?('t.t') }
+        it { should be_false }
       end
 
-      it "return false if called with 'test@example.com'" do
-        QuickML::Group.valid_name?('test@example.com').should be_false
+      describe "with argument 'test@example.com'" do
+        subject { QuickML::Group.valid_name?('test@example.com') }
+        it { should be_false }
       end
 
-      it "return false if called with 'test@qwik@jp'" do
-        QuickML::Group.valid_name?('test@qwik@jp').should be_false
+      describe "with argument 'test@qwik@jp'" do
+        subject { QuickML::Group.valid_name?('test@qwik@jp') }
+        it { should be_false }
       end
 
-      it "return true if called with 'test'" do
-        QuickML::Group.valid_name?('test').should be_true
+      describe "with argument 'test'" do
+        subject { QuickML::Group.valid_name?('test') }
+        it { should be_true }
       end
 
-      it "return false if called with 'te.st'" do
-        QuickML::Group.valid_name?('te.st').should be_false
+      describe "with argument 'te.st'" do
+        subject { QuickML::Group.valid_name?('te.st') }
+        it { should be_false }
       end
     end
 

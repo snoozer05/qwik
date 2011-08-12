@@ -3,16 +3,6 @@ require 'qwik/group'
 
 module QuickML
   describe Group do
-    def setup_config
-      Qwik::Config.new.tap{ |c|
-        c[:logger] = QuickML::MockLogger.new
-        c.update(Qwik::Config::DebugConfig)
-        c.update(Qwik::Config::TestConfig)
-        QuickML::ServerMemory.init_mutex(c)
-        QuickML::ServerMemory.init_catalog(c)
-      }
-    end
-
     describe ".get_name" do
       it "return ['test', 'example.com'] if called with 'test@example.com'" do
         QuickML::Group.get_name('test@example.com').should == ['test', 'example.com']
@@ -55,7 +45,6 @@ module QuickML
 
     context "when created by test@example.com" do
       before do
-        @config = setup_config
         @group = QuickML::Group.new(@config, 'test@example.com')
       end
 

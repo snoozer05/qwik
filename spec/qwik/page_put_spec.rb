@@ -2,7 +2,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 module Qwik
   describe Page, "deals with put" do
-    let(:page) { @site.get_pages.create_new }
+    let(:page) { @site.instance_eval{ @pages }.create_new }
 
     describe "#get" do
       subject { page.get }

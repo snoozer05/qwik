@@ -127,7 +127,7 @@ module Qwik
         before do
           site.create_new
         end
-        
+
         subject { site.get_page_title('1') }
         it { should == '1 - example.com/test' }
 

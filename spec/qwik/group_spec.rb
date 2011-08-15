@@ -52,12 +52,9 @@ module QuickML
     end
 
     context "when created by test@example.com" do
-      before do
-        @group = QuickML::Group.new(@config, 'test@example.com')
-      end
+      let(:group) { QuickML::Group.new(@config, 'test@example.com') }
 
-      subject { @group }
-
+      subject { group }
       its(:name) { should eq 'test' }
       its(:address) { should eq 'test@example.com' }
       its(:return_address) { should eq 'test=return@example.com' }

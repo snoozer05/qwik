@@ -2,6 +2,7 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 
 module QuickML
   describe GroupDB do
+    let(:site) { @site }
     let(:db) { QuickML::GroupDB.new('./.test/data', 'test').tap{|db| db.set_site(@site)} }
 
     describe "#set_site" do
@@ -42,7 +43,7 @@ module QuickML
             context "called Qwik::Page#put_with_time" do
               context "with arguments 'v3' and concrete time" do
                 before do
-                  page = @site['_GroupCount']
+                  page = site['_GroupCount']
                   page.put_with_time('v3', Time.now)
                 end
 
@@ -53,7 +54,7 @@ module QuickML
         end
 
         describe "access through _GroupCount page" do
-          subject{ @site['_GroupCount'] }
+          subject{ site['_GroupCount'] }
           it { should be_nil }
 
           context "called #put" do
@@ -62,7 +63,7 @@ module QuickML
                 db.put(:Count, 'v2')
               end
 
-              subject{ @site['_GroupCount'].get }
+              subject{ site['_GroupCount'].get }
               it { should == 'v2' }
             end
           end

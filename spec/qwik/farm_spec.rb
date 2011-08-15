@@ -3,20 +3,25 @@ require File.join(File.dirname(__FILE__), "..", "spec_helper")
 module Qwik
   describe Farm do
     let(:farm) { @memory.farm }
+    let(:config) { @config }
+    let(:site_dir) { @dir }
     let(:site) { farm.get_site('test') }
+
+    def rm_site_dir(dir)
+      dir.teardown
+      dir.rmtree if dir.directory?
+      dir.rmdir  if dir.directory?
+    end
 
     subject { farm }
     its(:list) { should be_a_kind_of(Array) }
 
     describe "#make_site" do
-      let(:dir) { @config.sites_dir.path }
+      let(:dir) { config.sites_dir.path }
 
       before do
         farm.close_all
-        @dir.teardown
-        @dir.rmtree if @dir.directory?
-        @dir.rmdir  if @dir.directory?
-
+        rm_site_dir(site_dir)
         farm.make_site('test', Time.at(0))
       end
 
@@ -42,7 +47,7 @@ module Qwik
 
     describe "#get_top_site" do
       subject { farm.get_top_site.sitename }
-      it { should == @config.default_sitename }
+      it { should == config.default_sitename }
     end
 
     describe "#get_site" do
@@ -70,13 +75,14 @@ module Qwik
     end
 
     describe "#delete" do
+      let(:site_path) { site.path }
+
       before do
-        @site_path = site.path
         farm.send(:delete, site)
       end
 
       it "site path should not be exist" do
-        @site_path.should_not be_exist
+        site_path.should_not be_exist
       end
     end
   end

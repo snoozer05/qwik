@@ -3,3 +3,4 @@ lib/qwik/testtemp.zip
 .test
 *.log
 .rvmrc
+*.swp

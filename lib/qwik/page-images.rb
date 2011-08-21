@@ -8,7 +8,7 @@ require 'qwik/page-files'
 module Qwik
   class PageFiles
     IMAGE_EXT = %w(jpg jpeg png gif bmp ico ppm)
-    CONVERT_PATH = '/usr/bin/convert'
+    CONVERT_PATH = %w(/usr/bin/convert /usr/local/bin/convert).detect{|convert| convert.path.executable?}
     THUMB_SIZE = 100
     SCREEN_WIDTH  = 1024
     SCREEN_HEIGHT = 768
